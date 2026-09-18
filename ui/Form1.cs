@@ -1,4 +1,7 @@
+using System;
 using System.Windows.Forms;
+using negocio;
+using dominio;
 
 namespace ui
 {
@@ -9,9 +12,14 @@ namespace ui
             InitializeComponent();
         }
 
-        private void Form1_Load(object sender, System.EventArgs e)
+        // Este es el evento que se creó al hacer doble clic en el formulario
+        private void Form1_Load(object sender, EventArgs e)
         {
+            ArticuloNegocio negocio = new ArticuloNegocio();
 
+            // Le decimos a la grilla que su origen de datos (DataSource) 
+            // es la lista que nos devuelve el método listar()
+            dgvArticulos.DataSource = negocio.listar();
         }
     }
 }
