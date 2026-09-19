@@ -17,9 +17,16 @@ namespace ui
         {
             ArticuloNegocio negocio = new ArticuloNegocio();
 
-            // Le decimos a la grilla que su origen de datos (DataSource) 
-            // es la lista que nos devuelve el método listar()
-            dgvArticulos.DataSource = negocio.listar();
+            try
+            {
+                // Le decimos a la grilla que su origen de datos (DataSource)
+                // es la lista que nos devuelve el método listar()
+                dgvArticulos.DataSource = negocio.listar();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
         }
     }
 }
