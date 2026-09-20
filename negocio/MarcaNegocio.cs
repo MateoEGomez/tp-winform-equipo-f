@@ -1,4 +1,5 @@
 using dominio;
+using System.Collections.Generic;
 
 namespace negocio
 {
@@ -51,6 +52,37 @@ namespace negocio
                 datos.setearConsulta("Delete from MARCAS where Id = @id");
                 datos.setearParametro("@id", id);
                 datos.ejecutarAccion();
+            }
+            catch (System.Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
+        public List<Marca> listar()
+        {
+            List<Marca> lista = new List<Marca>();
+            AccesoDatos datos = new AccesoDatos();
+
+            try
+            {
+                datos.setearConsulta("SELECT Id, Descripcion FROM MarcaS");
+                datos.ejecutarLectura();
+
+                while (datos.Lector.Read())
+                {
+                    Marca aux = new Marca();
+                    aux.Id = (int)datos.Lector["Id"];
+                    aux.Descripcion = (string)datos.Lector["Descripcion"];
+
+                    lista.Add(aux);
+                }
+
+                return lista;
             }
             catch (System.Exception ex)
             {
