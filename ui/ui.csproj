@@ -62,9 +62,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\dominio\dominio.csproj">
       <Project>{C1697724-994D-4C7B-B27F-90BA78F5084B}</Project>
       <Name>dominio</Name>

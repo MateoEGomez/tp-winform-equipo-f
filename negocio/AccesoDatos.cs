@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data.SqlClient;
-using System.Configuration; // 1. Agregamos la librería para leer el App.config
 
 namespace negocio
 {
@@ -20,9 +19,7 @@ namespace negocio
 
         public AccesoDatos()
         {
-            // 2. Reemplazamos el string fijo por la lectura dinámica
-            string cadena = ConfigurationManager.AppSettings["cadena-conexion"];
-            conexion = new SqlConnection(cadena);
+            conexion = new SqlConnection("server=.\\SQLEXPRESS; database=CATALOGO_P3_DB; integrated security=true");
             comando = new SqlCommand();
         }
 
