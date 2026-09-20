@@ -13,8 +13,9 @@ namespace negocio
 
             try
             {
-                // Hacemos los JOIN para traer las descripciones de Marca y Categoría
-                datos.setearConsulta("SELECT A.Id, A.Codigo, A.Nombre, A.Descripcion, A.Precio, M.Id as IdMarca, M.Descripcion as Marca, C.Id as IdCategoria, C.Descripcion as Categoria FROM ARTICULOS A JOIN MARCAS M on A.IdMarca = M.Id JOIN CATEGORIAS C on A.IdCategoria = C.Id");
+                // Hacemos LEFT JOIN para traer las descripciones de Marca y Categoría sin perder
+                // los artículos cuya marca o categoría no existe (vienen con esos campos en NULL)
+                datos.setearConsulta("SELECT A.Id, A.Codigo, A.Nombre, A.Descripcion, A.Precio, M.Id as IdMarca, M.Descripcion as Marca, C.Id as IdCategoria, C.Descripcion as Categoria FROM ARTICULOS A LEFT JOIN MARCAS M on A.IdMarca = M.Id LEFT JOIN CATEGORIAS C on A.IdCategoria = C.Id");
                 datos.ejecutarLectura();
 
                 while (datos.Lector.Read())
@@ -28,12 +29,26 @@ namespace negocio
                     aux.Precio = (decimal)datos.Lector["Precio"];
                     // Instanciamos y cargamos el objeto Marca dentro del Articulo
                     aux.Marca = new Marca();
-                    aux.Marca.Id = (int)datos.Lector["IdMarca"];
-                    aux.Marca.Descripcion = (string)datos.Lector["Marca"];
+                    if (!(datos.Lector["IdMarca"] is DBNull))
+                    {
+                        aux.Marca.Id = (int)datos.Lector["IdMarca"];
+                        aux.Marca.Descripcion = (string)datos.Lector["Marca"];
+                    }
+                    else
+                    {
+                        aux.Marca.Descripcion = "Sin marca";
+                    }
                     // Instanciamos y cargamos el objeto Categoria dentro del Articulo
                     aux.Categoria = new Categoria();
-                    aux.Categoria.Id = (int)datos.Lector["IdCategoria"];
-                    aux.Categoria.Descripcion = (string)datos.Lector["Categoria"];
+                    if (!(datos.Lector["IdCategoria"] is DBNull))
+                    {
+                        aux.Categoria.Id = (int)datos.Lector["IdCategoria"];
+                        aux.Categoria.Descripcion = (string)datos.Lector["Categoria"];
+                    }
+                    else
+                    {
+                        aux.Categoria.Descripcion = "Sin categoría";
+                    }
 
                     lista.Add(aux);
                 }
