@@ -37,6 +37,7 @@
             this.txtDescripcion.Name = "txtDescripcion";
             this.txtDescripcion.Size = new System.Drawing.Size(260, 20);
             this.txtDescripcion.TabIndex = 1;
+            this.txtDescripcion.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtDescripcion_KeyPress);
             //
             // btnAceptar
             //
