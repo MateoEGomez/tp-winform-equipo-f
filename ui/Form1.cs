@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Windows.Forms;
 using negocio;
 using dominio;
@@ -34,23 +34,25 @@ namespace ui
             }
         }
 
-        private void btnMarcas_Click(object sender, EventArgs e)
-        {
-            FrmMarcas marcas = new FrmMarcas();
-            marcas.ShowDialog();
-        }
         private void btnFiltrar_Click(object sender, EventArgs e)
         {
+            if (listaArticulo == null)
+                return;
+
+            string filtro = txtFiltrar.Text.Trim().ToUpper();
             List<Articulo> listaFiltrada;
-            listaFiltrada = listaArticulo.FindAll(x => x.Nombre == txtFiltrar.Text);
+
+            if (filtro != "")
+            {
+                listaFiltrada = listaArticulo.FindAll(x => x.Codigo.ToUpper().Contains(filtro) || x.Nombre.ToUpper().Contains(filtro) || x.Marca.Descripcion.ToUpper().Contains(filtro) || x.Categoria.Descripcion.ToUpper().Contains(filtro));
+            }
+            else
+            {
+                listaFiltrada = listaArticulo;
+            }
+
             dgvArticulos.DataSource = null;
             dgvArticulos.DataSource = listaFiltrada;
-        }
-
-        private void btnCategorias_Click(object sender, EventArgs e)
-        {
-            FrmCategorias categorias = new FrmCategorias();
-            categorias.ShowDialog();
         }
     }
 }
