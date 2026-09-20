@@ -34,5 +34,11 @@ namespace ui
             FrmMarcas marcas = new FrmMarcas();
             marcas.ShowDialog();
         }
+
+        private void btnCategorias_Click(object sender, EventArgs e)
+        {
+            FrmCategorias categorias = new FrmCategorias();
+            categorias.ShowDialog();
+        }
     }
 }
