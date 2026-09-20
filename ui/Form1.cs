@@ -39,13 +39,18 @@ namespace ui
             FrmMarcas marcas = new FrmMarcas();
             marcas.ShowDialog();
         }
-
         private void btnFiltrar_Click(object sender, EventArgs e)
         {
             List<Articulo> listaFiltrada;
             listaFiltrada = listaArticulo.FindAll(x => x.Nombre == txtFiltrar.Text);
             dgvArticulos.DataSource = null;
             dgvArticulos.DataSource = listaFiltrada;
+        }
+
+        private void btnCategorias_Click(object sender, EventArgs e)
+        {
+            FrmCategorias categorias = new FrmCategorias();
+            categorias.ShowDialog();
         }
     }
 }

@@ -1,4 +1,4 @@
-namespace ui
+﻿namespace ui
 {
     partial class Form1
     {
@@ -20,6 +20,7 @@ namespace ui
             this.txtFiltrar = new System.Windows.Forms.TextBox();
             this.lblBuscar = new System.Windows.Forms.Label();
             this.btnFiltrar = new System.Windows.Forms.Button();
+            this.btnCategorias = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvArticulos)).BeginInit();
             this.SuspendLayout();
             // 
@@ -67,6 +68,17 @@ namespace ui
             this.btnFiltrar.UseVisualStyleBackColor = true;
             this.btnFiltrar.Click += new System.EventHandler(this.btnFiltrar_Click);
             // 
+            //
+            // btnCategorias
+            //
+            this.btnCategorias.Location = new System.Drawing.Point(118, 330);
+            this.btnCategorias.Name = "btnCategorias";
+            this.btnCategorias.Size = new System.Drawing.Size(100, 30);
+            this.btnCategorias.TabIndex = 2;
+            this.btnCategorias.Text = "Categorías";
+            this.btnCategorias.UseVisualStyleBackColor = true;
+            this.btnCategorias.Click += new System.EventHandler(this.btnCategorias_Click);
+            
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -76,6 +88,8 @@ namespace ui
             this.Controls.Add(this.btnFiltrar);
             this.Controls.Add(this.lblBuscar);
             this.Controls.Add(this.txtFiltrar);
+
+            this.Controls.Add(this.btnCategorias);
             this.Controls.Add(this.btnMarcas);
             this.Controls.Add(this.dgvArticulos);
             this.Name = "Form1";
@@ -93,5 +107,6 @@ namespace ui
         private System.Windows.Forms.TextBox txtFiltrar;
         private System.Windows.Forms.Label lblBuscar;
         private System.Windows.Forms.Button btnFiltrar;
+        private System.Windows.Forms.Button btnCategorias;
     }
 }
