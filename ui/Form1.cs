@@ -28,5 +28,11 @@ namespace ui
                 MessageBox.Show(ex.ToString());
             }
         }
+
+        private void btnMarcas_Click(object sender, EventArgs e)
+        {
+            FrmMarcas marcas = new FrmMarcas();
+            marcas.ShowDialog();
+        }
     }
 }

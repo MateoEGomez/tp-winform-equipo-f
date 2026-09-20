@@ -58,6 +58,18 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="FrmMarcaEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmMarcaEdit.Designer.cs">
+      <DependentUpon>FrmMarcaEdit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmMarcas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmMarcas.Designer.cs">
+      <DependentUpon>FrmMarcas.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -16,6 +16,7 @@ namespace ui
         private void InitializeComponent()
         {
             this.dgvArticulos = new System.Windows.Forms.DataGridView();
+            this.btnMarcas = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvArticulos)).BeginInit();
             this.SuspendLayout();
             // 
@@ -26,13 +27,24 @@ namespace ui
             this.dgvArticulos.Name = "dgvArticulos";
             this.dgvArticulos.Size = new System.Drawing.Size(897, 302);
             this.dgvArticulos.TabIndex = 0;
-            // 
+            //
+            // btnMarcas
+            //
+            this.btnMarcas.Location = new System.Drawing.Point(12, 330);
+            this.btnMarcas.Name = "btnMarcas";
+            this.btnMarcas.Size = new System.Drawing.Size(100, 30);
+            this.btnMarcas.TabIndex = 1;
+            this.btnMarcas.Text = "Marcas";
+            this.btnMarcas.UseVisualStyleBackColor = true;
+            this.btnMarcas.Click += new System.EventHandler(this.btnMarcas_Click);
+            //
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.ClientSize = new System.Drawing.Size(963, 644);
+            this.Controls.Add(this.btnMarcas);
             this.Controls.Add(this.dgvArticulos);
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -44,5 +56,6 @@ namespace ui
         }
 
         private System.Windows.Forms.DataGridView dgvArticulos;
+        private System.Windows.Forms.Button btnMarcas;
     }
 }
