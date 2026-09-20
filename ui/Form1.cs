@@ -2,11 +2,13 @@ using System;
 using System.Windows.Forms;
 using negocio;
 using dominio;
+using System.Collections.Generic;
 
 namespace ui
 {
     public partial class Form1 : Form
     {
+        List<Articulo> listaArticulo;
         public Form1()
         {
             InitializeComponent();
@@ -15,13 +17,16 @@ namespace ui
         // Este es el evento que se creó al hacer doble clic en el formulario
         private void Form1_Load(object sender, EventArgs e)
         {
-            ArticuloNegocio negocio = new ArticuloNegocio();
+            cargar();
+        }
 
+        private void cargar()
+        {
+            ArticuloNegocio negocio = new ArticuloNegocio();
             try
             {
-                // Le decimos a la grilla que su origen de datos (DataSource)
-                // es la lista que nos devuelve el método listar()
-                dgvArticulos.DataSource = negocio.listar();
+                listaArticulo = negocio.listar();
+                dgvArticulos.DataSource = listaArticulo;
             }
             catch (Exception ex)
             {
@@ -33,6 +38,14 @@ namespace ui
         {
             FrmMarcas marcas = new FrmMarcas();
             marcas.ShowDialog();
+        }
+
+        private void btnFiltrar_Click(object sender, EventArgs e)
+        {
+            List<Articulo> listaFiltrada;
+            listaFiltrada = listaArticulo.FindAll(x => x.Nombre == txtFiltrar.Text);
+            dgvArticulos.DataSource = null;
+            dgvArticulos.DataSource = listaFiltrada;
         }
     }
 }
