@@ -61,6 +61,21 @@ namespace ui
             }
 
             Marca seleccionada = (Marca)dgvMarcas.CurrentRow.DataBoundItem;
+
+            try
+            {
+                if (marcaEnUso(seleccionada))
+                {
+                    MessageBox.Show("No se puede eliminar la marca " + seleccionada.Descripcion + " porque hay artículos que la usan.");
+                    return;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+                return;
+            }
+
             DialogResult respuesta = MessageBox.Show("¿Seguro que querés eliminar la marca " + seleccionada.Descripcion + "?", "Eliminar marca", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
             if (respuesta == DialogResult.Yes)
@@ -77,6 +92,18 @@ namespace ui
                     MessageBox.Show(ex.ToString());
                 }
             }
+        }
+
+        private bool marcaEnUso(Marca marca)
+        {
+            ArticuloNegocio negocio = new ArticuloNegocio();
+
+            foreach (Articulo articulo in negocio.listar())
+            {
+                if (articulo.Marca.Id == marca.Id)
+                    return true;
+            }
+            return false;
         }
 
         private void btnCerrar_Click(object sender, EventArgs e)

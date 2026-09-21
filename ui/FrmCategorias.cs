@@ -61,6 +61,21 @@ namespace ui
             }
 
             Categoria seleccionada = (Categoria)dgvCategorias.CurrentRow.DataBoundItem;
+
+            try
+            {
+                if (categoriaEnUso(seleccionada))
+                {
+                    MessageBox.Show("No se puede eliminar la categoría " + seleccionada.Descripcion + " porque hay artículos que la usan.");
+                    return;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+                return;
+            }
+
             DialogResult respuesta = MessageBox.Show("¿Seguro que querés eliminar la categoría " + seleccionada.Descripcion + "?", "Eliminar categoría", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
             if (respuesta == DialogResult.Yes)
@@ -77,6 +92,18 @@ namespace ui
                     MessageBox.Show(ex.ToString());
                 }
             }
+        }
+
+        private bool categoriaEnUso(Categoria categoria)
+        {
+            ArticuloNegocio negocio = new ArticuloNegocio();
+
+            foreach (Articulo articulo in negocio.listar())
+            {
+                if (articulo.Categoria.Id == categoria.Id)
+                    return true;
+            }
+            return false;
         }
 
         private void btnCerrar_Click(object sender, EventArgs e)
