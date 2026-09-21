@@ -12,7 +12,7 @@ namespace ui
 
         private void btnArticulos_Click(object sender, EventArgs e)
         {
-            Form1 articulos = new Form1();
+            FrmListadoArticulos articulos = new FrmListadoArticulos();
             articulos.ShowDialog();
         }
 
