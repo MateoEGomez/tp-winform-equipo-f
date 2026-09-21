@@ -111,6 +111,19 @@ namespace ui
             }
         }
 
+        private void btnVerDetalle_Click(object sender, EventArgs e)
+        {
+            if (dgvArticulos.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("Seleccioná un artículo de la lista.");
+                return;
+            }
+
+            Articulo seleccionado = (Articulo)dgvArticulos.SelectedRows[0].DataBoundItem;
+            FrmDetalleArticulo detalle = new FrmDetalleArticulo(seleccionado);
+            detalle.ShowDialog();
+        }
+
         private void btnCerrar_Click(object sender, EventArgs e)
         {
             Close();
