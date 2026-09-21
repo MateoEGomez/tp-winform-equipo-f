@@ -53,6 +53,13 @@ namespace negocio
                     lista.Add(aux);
                 }
 
+                ImagenNegocio imagenNegocio = new ImagenNegocio();
+                List<Imagen> imagenes = imagenNegocio.listar();
+                foreach (Articulo articulo in lista)
+                {
+                    articulo.Imagenes = imagenes.FindAll(x => x.IdArticulo == articulo.Id);
+                }
+
                 return lista;
             }
             catch (Exception ex)
@@ -94,6 +101,39 @@ namespace negocio
             foreach (Imagen imagen in nuevo.Imagenes)
             {
                 imagen.IdArticulo = nuevo.Id;
+                imagenNegocio.agregar(imagen);
+            }
+        }
+
+        public void modificar(Articulo articulo)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                datos.setearConsulta("Update ARTICULOS set Codigo = @codigo, Nombre = @nombre, Descripcion = @descripcion, IdMarca = @idMarca, IdCategoria = @idCategoria, Precio = @precio Where Id = @id");
+                datos.setearParametro("@codigo", articulo.Codigo);
+                datos.setearParametro("@nombre", articulo.Nombre);
+                datos.setearParametro("@descripcion", articulo.Descripcion);
+                datos.setearParametro("@idMarca", articulo.Marca.Id);
+                datos.setearParametro("@idCategoria", articulo.Categoria.Id);
+                datos.setearParametro("@precio", articulo.Precio);
+                datos.setearParametro("@id", articulo.Id);
+                datos.ejecutarAccion();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+
+            ImagenNegocio imagenNegocio = new ImagenNegocio();
+            imagenNegocio.eliminarPorArticulo(articulo.Id);
+            foreach (Imagen imagen in articulo.Imagenes)
+            {
+                imagen.IdArticulo = articulo.Id;
                 imagenNegocio.agregar(imagen);
             }
         }
