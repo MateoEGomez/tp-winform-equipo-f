@@ -63,6 +63,27 @@ namespace ui
             aplicarFiltro();
         }
 
+        private void btnAgregar_Click(object sender, EventArgs e)
+        {
+            FrmArticulo alta = new FrmArticulo();
+            alta.ShowDialog();
+            cargar();
+        }
+
+        private void btnModificar_Click(object sender, EventArgs e)
+        {
+            if (dgvArticulos.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("Seleccioná un artículo de la lista.");
+                return;
+            }
+
+            Articulo seleccionado = (Articulo)dgvArticulos.SelectedRows[0].DataBoundItem;
+            FrmArticulo modificar = new FrmArticulo(seleccionado);
+            modificar.ShowDialog();
+            cargar();
+        }
+
         private void btnEliminar_Click(object sender, EventArgs e)
         {
             if (dgvArticulos.SelectedRows.Count == 0)
